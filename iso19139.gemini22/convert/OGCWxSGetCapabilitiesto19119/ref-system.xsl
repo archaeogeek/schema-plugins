@@ -9,23 +9,15 @@
 	<!-- ============================================================================= -->
 
 	<xsl:template name="RefSystemTypes">
-		<referenceSystemIdentifier>
-			<RS_Identifier>
-				<code>
-                    <!-- Add WGS84 if exist else add only the first one to avoid to have the full list of CRS supported.
-                        OGC Clients should use the GetCapabilities to get this information  -->
-					<xsl:choose>
-						<xsl:when test="count(//SRS='EPSG:4326')!=0">
-           					<gco:CharacterString>4326</gco:CharacterString>
-           				</xsl:when>
-           				<xsl:otherwise>
-           					<gco:CharacterString><xsl:value-of select="//SRS[0]/."/></gco:CharacterString>
-           				</xsl:otherwise>
-         			</xsl:choose>
-           		</code>
-			</RS_Identifier>
-		</referenceSystemIdentifier>	
-	</xsl:template>
+	                <xsl:param name="srs"/>
+	                <referenceSystemIdentifier>
+	                        <RS_Identifier>
+	                                <code>
+	                    <gco:CharacterString><xsl:value-of select="$srs"/></gco:CharacterString>
+	                        </code>
+	                        </RS_Identifier>
+	                </referenceSystemIdentifier>
+	        </xsl:template>
 
 
 
